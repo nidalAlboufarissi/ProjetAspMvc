@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjetAspMvc.Models.Commande>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.article.Designation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCmd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumClient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QteArticle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.article.Designation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCmd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumClient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QteArticle)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NumCmd }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NumCmd }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NumCmd })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,44 @@
+﻿@model ProjetAspMvc.Models.Categorie
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    $(function () {
+        $("#CatSelect").change(function () {
+            $.get("/Categories/getProduct", { id: $("#CatSelect").val() }, function (data) {
+                $("#Contenu").empty();
+                $.each(data, function (index, ligne) {
+                    $("#mytable > tbody:last-child").append('<tr><td> ' + ligne.Designation + '</td><td>' + ligne.PrixU + '</td><td> <img src="'+ ligne.photo +'"/></td><td> <a href="@Url.Action("Details", "Articles")?id='+ligne.NumArticle+'">Details</a></td ></tr> ')
+                });
+            })
+        });
+    });
+</script>
+<h2>Consulter les Catalogues</h2>
+
+Choisir une Categorie : @Html.DropDownListFor(x => x.refcat, ViewBag.e as SelectList, "Choisir une categorie", new { id = "CatSelect" })
+<br /><br />
+<table class="table" id="mytable">
+
+    <tr>
+        <th>
+           Designation
+        </th>
+        <th>
+            PrixUnitaire en DH
+        </th>
+        <th>
+            photo de produit
+        </th>
+        <th>
+            Details
+        </th>
+    </tr>
+  
+    <tbody  id="Contenu">
+
+
+    </tbody>
+
+</table>
