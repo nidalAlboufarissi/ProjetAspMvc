@@ -99,11 +99,28 @@ namespace ProjetAspMvc.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NumArticle,Designation,PrixU,stock,photo,RefCat")] Article article)
+        public ActionResult Edit(ArticleIm article)
         {
+            string file = Path.GetFileNameWithoutExtension(article.imageFile.FileName);
+            string extension = Path.GetExtension(article.imageFile.FileName);
+            file = file + DateTime.Now.ToString("yymmssfff") + extension;
+            article.photo = "~/Image/" + file;
+            file = Path.Combine(Server.MapPath("~/Image/"), file);
+            article.imageFile.SaveAs(file);
+
             if (ModelState.IsValid)
             {
-                db.Entry(article).State = EntityState.Modified;
+                Article ar = new Article()
+                {
+                    
+                    Designation = article.Designation,
+                    photo = article.photo,
+                    NumArticle = article.NumArticle,
+                    PrixU = article.PrixU,
+                    stock = article.stock,
+                    RefCat = article.RefCat
+                };
+                db.Entry(ar).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

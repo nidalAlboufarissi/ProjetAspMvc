@@ -17,8 +17,9 @@ namespace ProjetAspMvc.Controllers
         // GET: Commandes
         public ActionResult Index()
         {
-            var commandes = db.Commandes.Include(c => c.article);
-            return View(commandes.ToList());
+            
+
+            return View();
         }
 
         // GET: Commandes/Details/5

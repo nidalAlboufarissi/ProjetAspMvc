@@ -12,27 +12,30 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.categorie.nomcat)
+        </th>
+        <th>
+            Nom
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Designation)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PrixU)
-        </th>
+            Prix Unitaire
+                </th>
         <th>
-            @Html.DisplayNameFor(model => model.stock)
+            Stock
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.photo)
-        </th>
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.categorie.nomcat)
+            <img src="@Url.Content(item.photo)" width="70" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categorie.nomcat, new { htmlAttributes = new { @class = "text-center" } })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Designation)
@@ -43,13 +46,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.stock)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.photo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NumArticle }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NumArticle }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NumArticle })
+            @Html.ActionLink("Edit", "Edit", new { id = item.NumArticle }) |
+            @Html.ActionLink("Details", "Details", new { id = item.NumArticle }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.NumArticle })
         </td>
     </tr>
 }

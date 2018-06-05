@@ -4,12 +4,16 @@
     ViewBag.Title = "Index";
 }
 <script>
+    function url_content(url) {
+        return $.get(url);
+    }
+
     $(function () {
         $("#CatSelect").change(function () {
             $.get("/Categories/getProduct", { id: $("#CatSelect").val() }, function (data) {
                 $("#Contenu").empty();
                 $.each(data, function (index, ligne) {
-                    $("#mytable > tbody:last-child").append('<tr><td> ' + ligne.Designation + '</td><td>' + ligne.PrixU + '</td><td> <img src="'+ ligne.photo +'"/></td><td> <a href="@Url.Action("Details", "Articles")?id='+ligne.NumArticle+'">Details</a></td ></tr> ')
+                    $("#mytable > tbody:last-child").append('<tr><td> ' + ligne.Designation + '</td><td>' + ligne.PrixU + '</td><td> <img src=" url_content('+ ligne.photo +')"/></td><td> <a href="@Url.Action("Details", "Articles")?id='+ligne.NumArticle+'">Details</a></td ></tr> ')
                 });
             })
         });

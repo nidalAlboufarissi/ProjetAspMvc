@@ -9,7 +9,10 @@
 <div>
     <h4>Article</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <div class="col-sm-6" style="float:left">
+        <img src="@Url.Content(Model.photo)"  class="img-rounded "  />
+    </div>
+    <dl class="dl-horizontal" style="float:left">
         <dt>
             @Html.DisplayNameFor(model => model.categorie.nomcat)
         </dt>
@@ -47,11 +50,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.photo)
+
         </dd>
 
     </dl>
 </div>
+<div style="clear:left"></div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.NumArticle }) |
     @Html.ActionLink("Back to List", "Index")
