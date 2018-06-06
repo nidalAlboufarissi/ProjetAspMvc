@@ -127,8 +127,22 @@ namespace ProjetAspMvc.Controllers
             ViewBag.RefCat = new SelectList(db.Categories, "refcat", "nomcat", article.RefCat);
             return View(article);
         }
-
-        // GET: Articles/Delete/5
+        public JsonResult getArticle(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(db.Articles.Where(p => p.RefCat == id), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getStock(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(db.Articles.Where(p => p.NumArticle == id), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getAll()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(db.Articles.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        [Authorize(Roles ="Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

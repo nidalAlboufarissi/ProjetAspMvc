@@ -72,6 +72,10 @@ namespace ProjetAspMvc.Controllers
             {
                 return View(model);
             }
+            Session["mail"] = model.Email;
+            HttpCookie cookie = new HttpCookie("Cookie");
+            cookie.Value = model.Email;
+            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true

@@ -16,7 +16,7 @@ namespace ProjetAspMvc.Models
           public DateTime DateCmd { get; set; }
         [Required]
 
-        public Nullable<int> NumClient { get; set; }
+        public string Id { get; set; }
         public virtual ApplicationUser client { get; set; }
         [Required]
         public Nullable<int> NumArticle { get; set; }

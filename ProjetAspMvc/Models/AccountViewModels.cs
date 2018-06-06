@@ -53,7 +53,6 @@ namespace ProjetAspMvc.Models
         [Display(Name = "Courrier électronique")]
         [EmailAddress]
         public string Email { get; set; }
-
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
@@ -65,10 +64,7 @@ namespace ProjetAspMvc.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NumClient { get; set; }
+        
         [Required]
         public string Nom { get; set; }
         [Required]

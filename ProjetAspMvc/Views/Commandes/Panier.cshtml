@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Panier";
+}
+@model IEnumerable<ProjetAspMvc.Models.Commande>
+<h2>Panier</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Photo de produit
+        </th>
+        <th>
+           Designiation
+        </th>
+        <th>
+            Prix Unitaire
+        </th>
+        <th>
+            Quantite
+        </th>
+
+        <th>
+            Date de commande
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Content(item.article.photo)" width="70" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.article.Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.article.PrixU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QteArticle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCmd)
+            </td>
+
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.NumCmd })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+Montant total en DH :@Html.ViewBag.s
+<p>
+    @Html.ActionLink("Ajouter un nouveau produit", "Index")
+</p>
+

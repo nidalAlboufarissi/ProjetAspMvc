@@ -10,7 +10,6 @@ namespace ProjetAspMvc.Models
     public class ApplicationUser : IdentityUser
     {
         
-        public int NumClient { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Ville { get; set; }
@@ -22,6 +21,7 @@ namespace ProjetAspMvc.Models
             // Ajouter les revendications personnalisées de l’utilisateur ici
             return userIdentity;
         }
+        
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -1,51 +1,43 @@
-﻿@model IEnumerable<ProjetAspMvc.Models.Commande>
-
+﻿@model ProjetAspMvc.Models.Categorie
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.article.Designation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCmd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumClient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QteArticle)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.article.Designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCmd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumClient)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QteArticle)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NumCmd }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NumCmd }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NumCmd })
-        </td>
-    </tr>
+<script>
+    $(function () {
+        $("#CatSelect").change(function () {
+            $.get("/Articles/getArticle", { id: $("#CatSelect").val() }, function (data) {
+                $("#Contenu").empty();
+                $.each(data, function (index, ligne) {
+                    $("#Contenu").append('<option value=' + ligne.NumArticle + '>' + ligne.Designation + '</option> ')
+                });
+            })
+        });
+    });
+    $(function () {
+        $("#Contenu").change(function () {
+            $.get("/Articles/getStock", { id: $("#Contenu").val() }, function (data) {
+                $.each(data, function (index, ligne) {
+                    $("#Stock").val(ligne.stock);
+                });
+            })
+        });
+    });
+    function validateForm() {
+        var c = document.getElementById("Stock").value;
+        if (document.getElementById("QteArticle").value > c) {
+            alert("vous avez depacer le stock");
+            return false;
+        }
+        else return true;
+    }
+    
+</script>
+<h2>Lancer une Commandes</h2><br /><br />
+@Html.BeginForm("Create","Commandes",FormMethod.Post, new {onsubmit = "return validateForm()" })
+{
+Choisir une Categorie : @Html.DropDownListFor(x => x.refcat, ViewBag.e as SelectList, "Choisir une categorie", new { id = "CatSelect" })
+<br /><br />Choisir un Article<select id="Contenu" name="NumArticle"></select>
+<br /><br />Stock : <input type="number" id="Stock" disabled/>
+<br /><br />Quantite : <input type="number" name="QteArticle" id="QteArticle" />
+<br /><br /><input type="submit" value="Commander" />
 }
-
-</table>

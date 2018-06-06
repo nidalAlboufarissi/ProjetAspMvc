@@ -8,8 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetAspMvc.Models;
 
+
 namespace ProjetAspMvc.Controllers
 {
+    [Authorize]
     public class CommandesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,11 +19,22 @@ namespace ProjetAspMvc.Controllers
         // GET: Commandes
         public ActionResult Index()
         {
-            
-
+            ViewBag.e = new SelectList(db.Categories, "refcat", "nomcat");
             return View();
         }
-
+        public ActionResult Panier()
+        {
+            String s = this.ControllerContext.HttpContext.Request.Cookies["Cookie"].Value;
+            string id = db.Users.Where(p => p.Email == s).First().Id;
+            List<Commande> c = db.Commandes.Where(p => p.Id == id).ToList();
+            double som = 0;
+            foreach (var i in c)
+            {
+               som+= (i.article.PrixU * i.QteArticle);
+            }
+            ViewBag.s = som;
+            return View(c);
+        }
         // GET: Commandes/Details/5
         public ActionResult Details(int? id)
         {
@@ -48,18 +61,20 @@ namespace ProjetAspMvc.Controllers
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NumCmd,DateCmd,NumClient,NumArticle,QteArticle")] Commande commande)
+        public ActionResult Create(Commande commande)
         {
-            if (ModelState.IsValid)
-            {
+            commande.DateCmd = DateTime.Now;
+            //string s = Session["mail"].ToString();
+            String s = this.ControllerContext.HttpContext.Request.Cookies["Cookie"].Value;
+            commande.Id = db.Users.Where(p => p.Email == s).First().Id;
                 db.Commandes.Add(commande);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+           Article ar= db.Articles.Where(p => p.NumArticle==commande.NumArticle).First();
+            ar.stock -= commande.QteArticle;
+            db.SaveChanges();
 
-            ViewBag.NumArticle = new SelectList(db.Articles, "NumArticle", "Designation", commande.NumArticle);
-            return View(commande);
+                return RedirectToAction("Panier");
+           
         }
 
         // GET: Commandes/Edit/5
@@ -116,9 +131,13 @@ namespace ProjetAspMvc.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Commande commande = db.Commandes.Find(id);
+            Article ar = db.Articles.Where(p=>p.NumArticle==commande.NumArticle).First();
+
+            ar.stock += commande.QteArticle;
             db.Commandes.Remove(commande);
+
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Panier");
         }
 
         protected override void Dispose(bool disposing)
