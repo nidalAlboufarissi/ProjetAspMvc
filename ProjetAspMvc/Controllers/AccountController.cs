@@ -72,7 +72,6 @@ namespace ProjetAspMvc.Controllers
             {
                 return View(model);
             }
-            Session["mail"] = model.Email;
             HttpCookie cookie = new HttpCookie("Cookie");
             cookie.Value = model.Email;
             this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
@@ -160,13 +159,13 @@ namespace ProjetAspMvc.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-
+                    HttpCookie cookie = new HttpCookie("Cookie");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
