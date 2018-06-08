@@ -7,13 +7,14 @@
     function url_content(url) {
         return $.get(url);
     }
-
+    var ROOT = '@Url.Content("~")';
     $(function () {
         $("#CatSelect").change(function () {
             $.get("/Categories/getProduct", { id: $("#CatSelect").val() }, function (data) {
                 $("#Contenu").empty();
                 $.each(data, function (index, ligne) {
-                    $("#mytable > tbody:last-child").append('<tr><td> ' + ligne.Designation + '</td><td>' + ligne.PrixU + '</td><td> <img src=" url_content('+ ligne.photo +')"/></td><td> <a href="@Url.Action("Details", "Articles")?id='+ligne.NumArticle+'">Details</a></td ></tr> ')
+                    var mystring = (ligne.photo).replace('~/', '');
+                    $("#mytable > tbody:last-child").append('<tr><td> ' + ligne.Designation + '</td><td>' + ligne.PrixU + '</td><td> <img src="' + ROOT + mystring + ' " width="50" /></td><td> <a href="@Url.Action("Details", "Articles")?id=' + ligne.NumArticle + '">Details</a></td ></tr> ')
                 });
             })
         });
