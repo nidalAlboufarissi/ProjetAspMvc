@@ -514,6 +514,8 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\SVGs.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Categories\Show.cshtml" />
+    <Content Include="Views\Commandes\Statistique.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

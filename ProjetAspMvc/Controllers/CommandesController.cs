@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using ProjetAspMvc.Models;
 
@@ -20,6 +21,10 @@ namespace ProjetAspMvc.Controllers
         public ActionResult Index()
         {
             ViewBag.e = new SelectList(db.Categories, "refcat", "nomcat");
+            return View();
+        }
+        public ActionResult Statistique()
+        {
             return View();
         }
         public ActionResult Panier()
@@ -148,5 +153,20 @@ namespace ProjetAspMvc.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult MyChart()
+        {
+            List<Article> l = db.Articles.ToList();
+            Dictionary<string, int> xy = new Dictionary<string, int>();
+            foreach (var i in l)
+            {
+                xy.Add(i.Designation, db.Commandes.Where(p => p.NumArticle == i.NumArticle).ToList().Count);
+            }
+            xy.OrderByDescending(x => x.Value);
+            string[] nom = xy.Keys.ToArray();
+            int[] nbr = xy.Values.ToArray();
+            new System.Web.Helpers.Chart(width: 700, height: 500, theme: ChartTheme.Green).AddSeries(chartType: "Column", xValue: nom, yValues: nbr).Write("png");
+            return null;
+        }
+      
     }
 }

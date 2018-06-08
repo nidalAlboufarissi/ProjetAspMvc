@@ -37,8 +37,9 @@
                     @if (User.IsInRole("Admin"))
     {
                 <li>@Html.ActionLink("Gestion Article", "index", "Articles")</li>
-                <li>@Html.ActionLink("Gestion Categorie", "Create", "Categories")</li>
+                <li>@Html.ActionLink("Gestion Categorie", "Show", "Categories")</li>
                 <li>@Html.ActionLink("Gestion Client", "Client", "Account")</li>
+                <li>@Html.ActionLink("Statistiques", "Statistique", "Commandes")</li>
 
 
 

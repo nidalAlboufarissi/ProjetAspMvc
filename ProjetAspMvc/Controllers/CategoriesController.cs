@@ -10,6 +10,7 @@ using ProjetAspMvc.Models;
 
 namespace ProjetAspMvc.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,6 +20,11 @@ namespace ProjetAspMvc.Controllers
         {
             ViewBag.e = new SelectList(db.Categories, "refcat", "nomcat");
             return View();
+        }
+        public ActionResult Show()
+        {
+            var articles = db.Categories;
+            return View(articles.ToList());
         }
         public JsonResult getProduct(int id)
         {

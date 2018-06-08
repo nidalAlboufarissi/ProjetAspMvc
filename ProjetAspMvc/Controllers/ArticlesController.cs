@@ -5,12 +5,14 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ProjetAspMvc.Models;
 
 namespace ProjetAspMvc.Controllers
 {
+    [Authorize]
     public class ArticlesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,20 +23,26 @@ namespace ProjetAspMvc.Controllers
             var articles = db.Articles.Include(a => a.categorie);
             return View(articles.ToList());
         }
-
+        
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            HttpClient c = new HttpClient();
+            HttpClient cl = new HttpClient();
+            cl.BaseAddress = new Uri("http://localhost:36411/");
+            cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage re = cl.GetAsync("api/values/" + id).Result;
+            Article et = re.Content.ReadAsAsync<Article>().Result;
+            if (et == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(et);
         }
 
         // GET: Articles/Create
