@@ -3,20 +3,40 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
-    </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+        <div class="westeros-dropdown-container">
+            <p class="login logged">
+                <!-- SVG LOGGED -->
+                <svg class="svg-logged">
+                    <use xlink:href="#svg-logged"></use>
+                </svg>
+                <!-- /SVG LOGGED -->
+                @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                <!-- SVG ARROW -->
+                <svg class="svg-arrow westeros-dropdown-control">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+                <!-- /SVG ARROW -->
+                <ul class="westeros-dropdown default hide-on-click">
+                    <li>
+                            <!-- SVG GEAR -->
+                            <svg class="svg-gear">
+                                <use xlink:href="#svg-gear"></use>
+                            </svg>
+                            <!-- /SVG GEAR -->
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+                    </li>
+                </ul> 
+            </p>
+        </div>
+            }
+            }
+            else
+            {
+            <p class="login">
+                Bienvenue visiteur, si vous avez un compte
+                @Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }), ou
+                @Html.ActionLink("S’inscrire maintenant", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            </p>
+            }

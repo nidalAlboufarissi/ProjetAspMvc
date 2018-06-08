@@ -22,11 +22,9 @@
                     <a href="mailto:questions@westeroscc.com">questions@westeroscc.com</a>
                 </p>
 
-                <p class="login">
-                    Bienvenue visiteur, si vous avez un compte
-                    <a href="register-login.html">S'identifier</a>, ou
-                    <a href="register-login.html">S'inscrire maintenant</a>
-                </p>
+                @Html.Partial("_LoginPartial")
+                
+
             </section>
             <!-- /HEADER TOP -->
         </div>
@@ -44,112 +42,7 @@
                     </a>
                 </div>
                 <!-- /LOGO -->
-                <!-- WESTEROS DROPDOWN CONTAINER-->
-                <div class="westeros-dropdown-container">
-                    <!-- CART CONTROL -->
-                    <div class="cart-control westeros-dropdown-control">
-                        <!-- SVG ORDER BOX -->
-                        <svg class="svg-order-box">
-                            <use xlink:href="#svg-order-box"></use>
-                        </svg>
-                        <!-- /SVG ORDER BOX -->
-                        <!-- SVG ARROW -->
-                        <svg class="svg-arrow select-arrow">
-                            <use xlink:href="#svg-arrow"></use>
-                        </svg>
-                        <!-- /SVG ARROW -->
-                        <h6>Votre Panier</h6>
-                        <p class="cart-content-short">(3)</p>
-                        <p class="cart-content-long">3 article (s) -  </p>
-                        <p class="highlighted">235 MAD</p>
-                    </div>
-                    <!-- /CART CONTROL -->
-                    <!-- CART -->
-                    <ul class="cart westeros-dropdown">
-                        <!-- CART ITEM -->
-                        <li class="item clearfix">
-                            <div class="picture">
-                                <figure class="liquid">
-                                    <img src="~/images/items/02.png" alt="product1">
-                                </figure>
-                            </div>
-                            <div class="description">
-                                <p class="highlighted category">T-Shirts</p>
-                                <h6>LE BUNNY CRAZY</h6>
-                            </div>
-                            <div class="quantity">
-                                <h6>1</h6>
-                            </div>
-                            <div class="price">
-                                <p class="highlighted">86 MAD</p>
-                            </div>
-                            <img src="~/images/items/remove.png" alt="remove">
-                        </li>
-                        <!-- /CART ITEM -->
-                        <!-- CART ITEM -->
-                        <li class="item clearfix">
-                            <div class="picture">
-                                <figure class="liquid">
-                                    <img src="~/images/items/33.png" alt="product1">
-                                </figure>
-                            </div>
-                            <div class="description">
-                                <p class="highlighted category">Coques De Téléphone</p>
-                                <h6>I-Ladyskull</h6>
-                            </div>
-                            <div class="quantity">
-                                <h6>2</h6>
-                            </div>
-                            <div class="price">
-                                <p class="highlighted">48 MAD</p>
-                            </div>
-                            <img src="~/images/items/remove.png" alt="remove">
-                        </li>
-                        <!-- /CART ITEM -->
-                        <!-- CART ITEM -->
-                        <li class="item clearfix">
-                            <div class="picture">
-                                <figure class="liquid">
-                                    <img src="~/images/items/32.png" alt="product1">
-                                </figure>
-                            </div>
-                            <div class="description">
-                                <p class="highlighted category">Baskets Personnalisées</p>
-                                <h6>The Devil Walks</h6>
-                            </div>
-                            <div class="quantity">
-                                <h6>2</h6>
-                            </div>
-                            <div class="price">
-                                <p class="highlighted">86 MAD</p>
-                            </div>
-                            <img src="~/images/items/remove.png" alt="remove">
-                        </li>
-                        <!-- /CART ITEM -->
-                        <!-- TOTAL -->
-                        <li class="total clearfix">
-                            <div>
-                                <h6>220 MAD</h6>
-                                <h6>15 MAD</h6>
-                                <p class="highlighted">235 MAD</p>
-                            </div>
-                            <div>
-                                <h6>Sous-Total</h6>
-                                <h6>Livraison</h6>
-                                <h6>Total</h6>
-                            </div>
-                        </li>
-                        <!-- /TOTAL -->
-                        <!-- ORDER -->
-                        <li class="order clearfix">
-                            <a href="checkout.html" class="button">Commander</a>
-                            <a href="cart.html" class="button secondary">Au Panier</a>
-                        </li>
-                        <!-- /ORDER -->
-                    </ul>
-                    <!-- /CART -->
-                </div>
-                <!-- /WESTEROS DROPDOWN CONTAINER -->
+
             </section>
             <!-- /HEADER BOTTOM -->
         </div>
@@ -182,19 +75,19 @@
         <!-- MENU LIST -->
         <ul>
             <li>
-                <a href="index.html">Acceuil</a>
+                @Html.ActionLink("Accueil", "Index", "Home")
             </li>
             <li>
-                <a href="women-shop.html">Femmes</a>
+                @Html.ActionLink("Toutes les Categories", "Index", "Categories")
             </li>
             <li>
-                <a href="men-shop.html">Hommes</a>
+                @Html.ActionLink("Mon Panier", "Panier", "Commandes")
             </li>
             <li>
-                <a href="men-shop.html">Divers</a>
+                @Html.ActionLink("Convertisseur", "Convertisseur", "Home")
             </li>
             <li>
-                <a href="contact.html">Contact</a>
+                @Html.ActionLink("Commandes", "Index", "Commandes")
             </li>
         </ul>
         <!-- /MENU LIST -->
@@ -204,413 +97,13 @@
     <nav id="main-menu">
         <img class="pull-nav" src="~/images/icons/pull-icon.png" alt="pull-icon">
         <ul>
-            <li><a href="index.html">Acceuil</a></li>
+            <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
             <li>
-                <a href="#" class="submenu">Toutes les catégories</a>
-                <!-- SUBMENU MEDIUM -->
-                <ul class="submenu-medium">
-                    <li>
-                        <!-- SUBMENU LIST -->
-                        <article class="submenu-list">
-                            <figure class="liquid">
-                                <img src="~/images/items/16.png" alt="product-wide">
-                            </figure>
-                            <h6>Hommes</h6>
-                            <ul>
-                                <li>
-                                    <a href="men-shop.html">
-                                        T-Shirts
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Sweats à Capuche
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Casquettes Personnalisées
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Baskets
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Sacs à Dos
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Casques Audio
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="men-shop.html">
-                                        Portefeuilles
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
-                        <!-- /SUBMENU LIST -->
-                        <!-- SUBMENU LIST -->
-                        <article class="submenu-list">
-                            <figure class="liquid">
-                                <img src="~/images/items/02.png" alt="product-wide">
-                            </figure>
-                            <h6>Femmes</h6>
-                            <ul>
-                                <li>
-                                    <a href="women-shop.html">
-                                        T-Shirts
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Sweats à Capuche
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Casquettes Personnalisées
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Baskets
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Sacs à Dos
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Casques Audio
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="women-shop.html">
-                                        Sacs à Main
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
-                        <!-- /SUBMENU LIST -->
-                        <!-- SUBMENU LIST -->
-                        <article class="submenu-list">
-                            <figure class="liquid">
-                                <img src="~/images/items/38.png" alt="product-wide">
-                            </figure>
-                            <h6>Divers</h6>
-                            <ul>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Collection de TV
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Bandes Dessinées
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Collection d'été
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Back to School
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Patins
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Saison de Surf
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="merchandising-shop.html">
-                                        Collection Anime
-                                        <!-- SVG ARROW -->
-                                        <svg class="svg-arrow">
-                                            <use xlink:href="#svg-arrow"></use>
-                                        </svg>
-                                        <!-- /SVG ARROW -->
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
-                        <!-- /SUBMENU LIST -->
-                        <!-- PRODUCT PREVIEW -->
-                        <ul class="product-preview">
-                            <li>
-                                <a href="full-view.html">
-                                    <figure class="liquid">
-                                        <img src="~/images/items/31.png" alt="product1">
-                                    </figure>
-                                </a>
-                                <a href="women-shop.html"><p class="highlighted category">Backets</p></a>
-                                <a href="full-view.html"><h6>Fou Mandrin</h6></a>
-                                <!-- RATING -->
-                                <ul class="rating">
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li>
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                </ul>
-                                <!-- /RATING -->
-                                <p class="highlighted current">57 MAD</p>
-                            </li>
-
-                            <li>
-                                <a href="full-view.html">
-                                    <figure class="liquid">
-                                        <img src="~/images/items/16.png" alt="product1">
-                                    </figure>
-                                </a>
-                                <a href="men-shop.html"><p class="highlighted category">T-Shirts</p></a>
-                                <a href="full-view.html"><h6>L'Épingle du Diable</h6></a>
-                                <!-- RATING -->
-                                <ul class="rating">
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li>
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                </ul>
-                                <!-- /RATING -->
-                                <p class="highlighted current">54 MAD</p>
-                            </li>
-
-                            <li>
-                                <a href="full-view.html">
-                                    <figure class="liquid">
-                                        <img src="~/images/items/07.png" alt="product1">
-                                    </figure>
-                                </a>
-                                <a href="women-shop.html"><p class="highlighted category">T-Shirts</p></a>
-                                <a href="full-view.html"><h6>Robo Planet</h6></a>
-                                <!-- RATING -->
-                                <ul class="rating">
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li class="filled">
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                    <li>
-                                        <!-- SVG STAR -->
-                                        <svg class="svg-star">
-                                            <use xlink:href="#svg-star"></use>
-                                        </svg>
-                                        <!-- /SVG STAR -->
-                                    </li>
-                                </ul>
-                                <!-- /RATING -->
-                                <p class="highlighted current">105 MAD</p>
-                            </li>
-                        </ul>
-                        <!-- /PRODUCT PREVIEW -->
-                    </li>
-                </ul>
-                <!-- /SUBMENU MEDIUM -->
+                @Html.ActionLink("Toutes les Categories", "Index", "Categories")
             </li>
-            <li><a href="women-shop.html">Femmes</a></li>
-            <li><a href="men-shop.html">Hommes</a></li>
-            <li><a href="men-shop.html">Divers</a></li>
-            <li><a href="blog.html">Convertisseur</a></li>
+            <li>@Html.ActionLink("Mon Panier", "Panier", "Commandes")</li>
+            <li>@Html.ActionLink("Convertisseur", "Convertisseur", "Home")</li>
+            <li>@Html.ActionLink("Commandes", "Index", "Commandes")</li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
@@ -1085,7 +578,7 @@
         </div>
         <div id="footer-bottom-wrap">
             <section id="footer-bottom">
-                <p><a href="index.html">Westeros Custom Clothing</a> Template <br> <span>|</span> All Rights Reserved 2014</p>
+                <p><a href="index.html">Westeros Custom Clothing</a> <br> <span>|</span> All Rights Reserved 2018</p>
                 <!-- SOCIAL LINKS -->
                 <ul class="social-links">
                     <li class="fb"><a href="#"></a></li>
