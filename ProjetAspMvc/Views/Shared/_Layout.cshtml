@@ -25,12 +25,24 @@
                 @Html.ActionLink("E-Commerce", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("  Consulter les Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Mon Panier", "Panier", "Commandes")</li>
-                    <li>@Html.ActionLink("Convertisseur", "Convertisseur", "Home")</li>
-                    <li>@Html.ActionLink("Commandes", "Index", "Commandes")</li>
+                    @if (!User.IsInRole("Admin"))
+    {
+                <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                <li>@Html.ActionLink("  Consulter les Categories", "Index", "Categories")</li>
+                <li>@Html.ActionLink("Mon Panier", "Panier", "Commandes")</li>
+                <li>@Html.ActionLink("Commandes", "Index", "Commandes")</li>
+}
+                    @if (User.IsInRole("Admin"))
+    {
+                <li>@Html.ActionLink("Gestion Article", "index", "Articles")</li>
+                <li>@Html.ActionLink("Gestion Categorie", "Create", "Categories")</li>
+                <li>@Html.ActionLink("Gestion Client", "Client", "Account")</li>
+
+
+
+}
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
