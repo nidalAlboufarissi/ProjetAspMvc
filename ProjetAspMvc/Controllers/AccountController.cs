@@ -21,6 +21,19 @@ namespace ProjetAspMvc.Controllers
         public AccountController()
         {
         }
+        public ActionResult Client()
+        {
+            return View();
+        }
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public JsonResult GetCountry(string key)
+        {
+            var ma = (from m in db.Users
+                          where m.Nom.Contains(key)
+                          select m).ToList();
+            return Json(ma, JsonRequestBehavior.AllowGet);
+        }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
